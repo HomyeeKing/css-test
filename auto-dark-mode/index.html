@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        body{
+            background-color: purple;
+        }
+      .auto-dark-theme {
+          border-color: red;
+      }
+    </style>
+  </head>
+  <body color-schema="dark">
+
+    <div
+      id="detection"
+      style="display: none; background-color: canvas; color-scheme: light"
+    ></div>
+    <script>
+      function setAutoDarkClass() {
+        // We can also use JavaScript to generate the detection element.
+        const detectionDiv = document.createElement("div");
+        detectionDiv.style.display = "none";
+        detectionDiv.style.backgroundColor = "canvas";
+        detectionDiv.style.colorScheme = "light";
+        document.body.appendChild(detectionDiv);
+        // If the computed style is not white then the page is in Auto Dark Theme.
+        const isAutoDark =
+          getComputedStyle(detectionDiv).backgroundColor !=
+          "rgb(255, 255, 255)";
+console.log(getComputedStyle(detectionDiv).backgroundColor);
+        // remove the detection element from the DOM.
+        document.body.removeChild(detectionDiv);
+
+        // Set the marker class on the body if in Auto Dark Theme.
+        if (isAutoDark) {
+          document.body.classList.add("auto-dark-theme");
+        }
+      }
+      document.addEventListener("DOMContentLoaded", setAutoDarkClass);
+    </script>
+  </body>
+</html>
